@@ -1,0 +1,73 @@
+<div *ngIf="showUser">
+    <div class="card" style="margin:5px;padding: 10px;text-align: right;">
+      <input type="button"  (click)="showUser = false" value="Create User" id="create"></div>
+<table style='border: 1px;'>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Website
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    <tr *ngFor="let user of UserData">
+    <td >    
+      <span>{{user.name}}</span>
+    </td>    
+    <td>      
+      <span>{{user.email}}</span>
+   </td>
+    
+    <td >     
+      <span>{{user.phone}}</span>
+   </td>
+    
+    <td >    
+      <span>{{user.website}}</span>
+    </td>
+    <td>
+      <button (click)="edit(user);showUser = false" id="edit">Edit</button>
+
+      <button (click)="delete(user)" id="delete">Delete</button>
+        </td>
+    </tr>
+  
+
+</table>
+</div>
+<div *ngIf="!showUser" id="outPopUp" style="width:500px; margin:0 auto;padding: auto;" class="card">
+
+<form class="p-5" [formGroup]="userForm">     
+    <div class="form-row">    
+      <div >
+        <h2> {{action=='edit'?'Edit Form':'Registration Form'}}</h2>  
+      
+      </div>
+      <div class="form-group">    
+         <label for="name">Name</label>
+        <input type="text" id="inputname" formControlName="name">       
+        <label for="inputEmail">Email</label>  
+        <input type="email" formControlName="email" class="form-control" id="inputEmail">    
+       
+        <label for="inputPhone">Phone</label>
+        <input type="text" formControlName="phone" class="form-control" id="inputPhone">
+           
+         <label for="inputWebsite">Web site</label>     
+        <input type="text" formControlName="website" class="form-control" id="inputWebsite">          
+            
+    <input type="submit"   class="btn btn-primary" (click)="InsertUser()" value="{{action=='edit'?'Edit':'Insert'}}"> 
+         
+    <input type="submit" class="btn btn-primary" (click)="showUser = true" value="List User">
+  </div>  
+  </div>  
+  </form>    
+</div>
